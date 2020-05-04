@@ -1,8 +1,6 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-
-class AddImageFields extends Migration {
+class Add_Image_Fields {
 
 	/**
 	 * Make changes to the database.
@@ -26,7 +24,7 @@ class AddImageFields extends Migration {
 	public function down()
 	{
 		Schema::table("modpacks", function($table) {
-			$table->dropColumn(array("icon", "logo", "background"));
+			$table->drop_column(array("icon", "logo", "background"));
 		});
 	}
 

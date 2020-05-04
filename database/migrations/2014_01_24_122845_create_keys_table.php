@@ -1,8 +1,6 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-
-class CreateKeysTable extends Migration {
+class Create_Keys_Table {
 
 	/**
 	 * Make changes to the database.
@@ -15,8 +13,13 @@ class CreateKeysTable extends Migration {
 			$table->increments('id');
 			$table->string('name');
 			$table->string('api_key');
-			$table->nullableTimestamps();
+			$table->timestamps();
 		});
+
+		$key = new Key();
+		$key->name = "default";
+		$key->api_key = Config::get('solder.platform_key');
+		$key->save();
 	}
 
 	/**

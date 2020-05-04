@@ -1,9 +1,6 @@
 <?php
 
-use App\Modpack;
-use Illuminate\Database\Migrations\Migration;
-
-class AddModpackHidden extends Migration {
+class Add_Modpack_Hidden {
 
 	/**
 	 * Make changes to the database.
@@ -30,7 +27,7 @@ class AddModpackHidden extends Migration {
 	public function down()
 	{
 		Schema::table('modpacks', function($table) {
-			$table->dropColumn('hidden');
+			$table->drop_column('hidden');
 		});
 	}
 

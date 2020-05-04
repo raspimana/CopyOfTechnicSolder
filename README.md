@@ -19,37 +19,60 @@ Solder also interfaces with the Technic Platform using an API key you can genera
 Requirements
 -------------
 
-* PHP >= 7.2.0
-* Composer - <https://getcomposer.org/>
-* BCMath PHP Extension
-* Ctype PHP Extension
-* Fileinfo PHP extension
-* JSON PHP Extension
-* Mbstring PHP Extension
-* OpenSSL PHP Extension
-* PDO PHP Extension
-* Tokenizer PHP Extension
-* XML PHP Extension
-* A MySQL or PostgreSQL database
+* PHP >=5.3.0 (Will not work on older versions due to usage of new features in PHP 5.3.0)
+* PHP MCrypt Extension
+* PHP Curl Extension
+* PHP GD Extension
 
-Installation/Updating Solder
+Installation
 -------------
+
+First thing is first, clone Solder into a directory on your web box. You will want to setup Apache, Nginx, or whatever you are using to use the "public" folder as the document root. This way the main Solder operating files are not publically available through the web.
+
+Next, copy **application/config-sample** to **application/config** and **public/.htaccess-sample** to **public/.htaccess**. Edit the files in the config directory to your liking. The only two files that currently *require* editing are **database.php** and **solder.php**. You will also want to give your box permissions to write to the **storage** folder. You can do this with a chmod or whatever you prefer.
+
+Solder.php has 3 values that need to be filled in:
+
+* **repo_location:** This points to the location of your repo files either locally or remotely. If your Solder install is on the same box as your mod repository, you can fill in the absolute path to those files. This will greatly increase the speed in which md5's are calculated for your database. If your mod repository is hosted elsewhere, you can simply put the web accessible URL in for this value. Make sure to include a trailing slash in *both* cases.
+* **mirror_url:** The mirror url is the web accessible url to your mod repository. If you are using a URL for repo_location you can just fill in the same value here.
+
+Once you have everything filled in for your configuration, you will need to migrate your database. Doing this is *really* easy, just run the following two commands in order from the root Solder folder.
+
+1. php artisan migrate:install
+2. php artisan migrate
+
+That's all you have to do to get your database ready!
+
+Once you have Solder configured, just access it at the url you set it up on and log in.
+
+The default user information is:
+
+> Email: admin@admin.com
+
+> Password: admin
 
 Refer to our documentation here: <https://docs.solder.io/>
 
-If there is any missing/incorrect info, please post an issue on our [issue tracker](https://github.com/TechnicPack/TechnicSolder/issues)
-
-Changes
+Updating Solder
 ---------------
 
-Changes are now displayed within the application itself.
+Solder waits for no one! If you use Solder you need to make sure it's up to date. Issues you may be having may have already been resolved in a recent commit. Who knows! Updating is simple.
 
 Also see the [Technic News](https://www.technicpack.net/article/category/10) feed for Solder updates
 
 
+**As of version 0.6, changelogs will be listed below with information regarding required migrations**
+
+Changes
+---------------
+
+**Version 0.6**
+
+-  Switched to Bootstrap 3 and revamped entire Solder interface
+-  API Keys are now managed by the database. Your old key will be imported during migration
+-  **0.6 requires a migration!**
+
 Troubleshooting
 ---------------
 
-If you are having issues and can't seem to figure out what's going on, join our [development Discord server][discord].
-
-[discord]: https://discord.gg/0XSjZibQg6yguy1x
+If you are having issues and can't seem to figure out what's going on, come ask in IRC @ **irc.synirc.net #technic** or open an issue here on GitHub. Support is not guaranteed!

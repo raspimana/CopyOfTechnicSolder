@@ -1,8 +1,6 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-
-class CreateClientsTables extends Migration {
+class Create_Clients_Tables {
 
 	/**
 	 * Make changes to the database.
@@ -15,14 +13,14 @@ class CreateClientsTables extends Migration {
 			$table->increments('id');
 			$table->string('name');
 			$table->string('uuid');
-			$table->nullableTimestamps();
+			$table->timestamps();
 		});
 
 		Schema::create("client_modpack", function($table) {
 			$table->increments('id');
 			$table->integer('client_id');
 			$table->integer('modpack_id');
-			$table->nullableTimestamps();
+			$table->timestamps();
 		});
 	}
 

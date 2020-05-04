@@ -1,8 +1,6 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-
-class UpdateModpacksAddOrder extends Migration {
+class Update_Modpacks_Add_Order {
 
 	/**
 	 * Make changes to the database.
@@ -24,7 +22,7 @@ class UpdateModpacksAddOrder extends Migration {
 	public function down()
 	{
 		Schema::table('modpacks', function($table) {
-			$table->dropColumn('order');
+			$table->drop_column('order');
 		});
 	}
 

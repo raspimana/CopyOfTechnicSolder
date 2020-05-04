@@ -1,8 +1,6 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-
-class UpdateModpackBuildsPrivate extends Migration {
+class Update_Modpack_Builds_Private {
 
 	/**
 	 * Make changes to the database.
@@ -12,11 +10,11 @@ class UpdateModpackBuildsPrivate extends Migration {
 	public function up()
 	{
 		Schema::table('modpacks', function($table) {
-			$table->boolean('private')->default(0);
+			$table->boolean('private');
 		});
 
 		Schema::table('builds', function($table) {
-			$table->boolean('private')->default(0);
+			$table->boolean('private');
 		});
 	}
 
@@ -28,11 +26,11 @@ class UpdateModpackBuildsPrivate extends Migration {
 	public function down()
 	{
 		Schema::table('modpacks', function($table) {
-			$table->dropColumn('private');
+			$table->drop_column('private');
 		});
 
 		Schema::table('builds', function($table) {
-			$table->dropColumn('private');
+			$table->drop_column('private');
 		});
 	}
 
