@@ -1,3 +1,4 @@
+dist: trusty
 branches:
   except:
     - /^legacy\/.*$/
@@ -7,10 +8,8 @@ cache:
   directories:
     - $HOME/.composer/cache
 php:
-  - 5.5
   - 5.6
   - 7.0
-  - hhvm
 env:
   global:
     - APP_ENV='testing'
@@ -31,12 +30,13 @@ before_install:
   - echo $REPO
   - rm -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini
   - composer self-update
-install: travis_retry composer install --prefer-source --no-interaction
+install: COMPOSER_MEMORY_LIMIT=-1 travis_retry composer install --prefer-source --no-interaction
 before_script:
   - php artisan env
   - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'DROP DATABASE IF EXISTS solder;' -U postgres; fi"
   - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'create database solder;' -U postgres; fi"
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'create database IF NOT EXISTS solder;'; fi"
+  - cp -R app/config-sample app/config
   - php artisan migrate:install
   - php artisan migrate
   - php artisan db:seed --class="TestSeeder"
