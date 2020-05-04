@@ -1,6 +1,12 @@
 TechnicSolder
 =============
 
+[![License](https://poser.pugx.org/solder/solder/license.svg)](https://packagist.org/packages/solder/solder)
+[![Latest Stable Version](https://poser.pugx.org/solder/solder/v/stable.svg)](https://packagist.org/packages/solder/solder) [![Build Status](https://travis-ci.org/TechnicPack/TechnicSolder.svg?branch=master)](https://travis-ci.org/TechnicPack/TechnicSolder)
+[![Latest Unstable Version](https://poser.pugx.org/solder/solder/v/unstable.svg)](https://packagist.org/packages/solder/solder) [![Build Status](https://travis-ci.org/TechnicPack/TechnicSolder.svg?branch=dev)](https://travis-ci.org/TechnicPack/TechnicSolder)
+
+Join us on [Discord][discord]!
+
 What is Solder?
 --------------
 
@@ -8,9 +14,10 @@ TechnicSolder is an API that sits between a modpack repository and the launcher.
 
 Using Solder also means your packs will download each mod individually. This means the launcher can check MD5's against each version of a mod and if it hasn't changed, use the cached version of the mod instead. What does this mean? Small incremental updates to your modpack doesn't mean redownloading the whole thing every time!
 
-Solder also interfaces with the Technic Platform using an API key you can generate through your account there. When Solder has this key it can directly interact with your Platform account. When creating new modpacks you will be able to import any packs you have registered in your Solder install. It will also create detailed mod lists on your Platform page! (assuming you have the respective data filled out in Solder) Neat huh?
+Solder also interfaces with the Technic Platform using an API key you can generate through your account there. When Solder has this key it can directly interact with your Platform account. When creating new modpacks you will be able to import any packs you have registered in your Solder install. It will also create detailed mod lists on your Platform page! (assuming you have the respective data filled out in Solder). Neat huh?
 
 Requirements
+<<<<<<< HEAD
 -------------
 
 * PHP >=5.3.0 (Will not work on older versions due to usage of new features in PHP 5.3.0)
@@ -44,24 +51,50 @@ The default user information is:
 > Email: admin@admin.com
 
 > Password: admin
+=======
+-------------
 
-Change this information as soon as you log in!
+* PHP >= 7.2.0
+* Composer - <https://getcomposer.org/>
+* BCMath PHP Extension
+* Ctype PHP Extension
+* Fileinfo PHP extension
+* JSON PHP Extension
+* Mbstring PHP Extension
+* OpenSSL PHP Extension
+* PDO PHP Extension
+* Tokenizer PHP Extension
+* XML PHP Extension
+* A MySQL or PostgreSQL database
 
+Installation/Updating Solder
+-------------
+>>>>>>> master
+
+Refer to our documentation here: <https://docs.solder.io/>
+
+<<<<<<< HEAD
 Updating Solder
 ---------------
 
 Solder waits for no one! If you use Solder you need to make sure it's up to date. Issues you may be having may have already been resolved in a recent commit. Who knows! Updating is simple.
+=======
+If there is any missing/incorrect info, please post an issue on our [issue tracker](https://github.com/TechnicPack/TechnicSolder/issues)
 
-1. Pull in changes from your origin (git pull origin)
-2. Check if any config files were changed (usually not the case) and make adjustments if necessary
-3. Run your migrations again (You don't need to do migrate:install, only migrate)
+Changes
+---------------
 
-That's it. Your API is now on the latest version.
+Changes are now displayed within the application itself.
+>>>>>>> master
+
+Also see the [Technic News](https://www.technicpack.net/article/category/10) feed for Solder updates
+
 
 **As of version 0.6, changelogs will be listed below with information regarding required migrations**
 
 Changes
 ---------------
+<<<<<<< HEAD
 
 **Version 0.6**
 
@@ -73,3 +106,9 @@ Troubleshooting
 ---------------
 
 If you are having issues and can't seem to figure out what's going on, come ask in IRC @ **irc.synirc.net #technic** or open an issue here on GitHub. Support is not guaranteed!
+=======
+
+If you are having issues and can't seem to figure out what's going on, join our [development Discord server][discord].
+
+[discord]: https://discord.gg/0XSjZibQg6yguy1x
+>>>>>>> master
