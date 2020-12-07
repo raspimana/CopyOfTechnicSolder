@@ -1,0 +1,97 @@
+{
+  "language": "php",
+  "os": [
+    "linux"
+  ],
+  "dist": "trusty", 
+  "branches": {
+    "except": [
+      "/^legacy\\/.*$/",
+      "heroku"
+    ]
+  },
+  "cache": {
+    "directories": [
+      "$HOME/.composer/cache"
+    ]
+  },
+  "php": [
+    "7.2"
+  ],
+  "env": {
+    "global": [
+      {
+        "APP_ENV": "'testing'"
+      }
+    ],
+    "jobs": [
+      {
+        "DB": "\"pgsql\"",
+        "REPO": "\"$TRAVIS_BUILD_DIR/public/resources/default/\"",
+        "REPO_TYPE": "\"local\""
+      },
+      {
+        "DB": "\"mysql\"",
+        "REPO": "\"$TRAVIS_BUILD_DIR/public/resources/default/\"",
+        "REPO_TYPE": "\"local\""
+      },
+      {
+        "DB": "\"pgsql\"",
+        "REPO": "\"http://technic.pagefortress.com/\"",
+        "REPO_TYPE": "\"remote\""
+      },
+      {
+        "DB": "\"mysql\"",
+        "REPO": "\"http://technic.pagefortress.com/\"",
+        "REPO_TYPE": "\"remote\""
+      }
+    ]
+  },
+  "sudo": false,
+  "before_install": [
+    "echo $REPO",
+    "rm -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini",
+    "composer self-update"
+  ],
+  "install": [
+    "COMPOSER_MEMORY_LIMIT=-1 travis_retry composer install --prefer-source --no-interaction"
+  ],
+  "before_script": [
+    "php artisan env",
+    "sh -c \"if [ '$DB' = 'pgsql' ]; then psql -c 'DROP DATABASE IF EXISTS solder;' -U postgres; fi\"",
+    "sh -c \"if [ '$DB' = 'pgsql' ]; then psql -c 'create database solder;' -U postgres; fi\"",
+    "sh -c \"if [ '$DB' = 'mysql' ]; then mysql -e 'create database IF NOT EXISTS solder;'; fi\"",
+    "cp -R app/config-sample app/config",
+    "php artisan migrate:install",
+    "php artisan migrate",
+    "php artisan db:seed --class=\"TestSeeder\""
+  ],
+  "script": [
+    "vendor/bin/phpunit --verbose"
+  ],
+  "jobs": {
+    "fast_finish": true,
+    "exclude": [
+      {
+        "php": "hhvm",
+        "env": [
+          {
+            "DB": "\"pgsql\"",
+            "REPO": "\"$TRAVIS_BUILD_DIR/public/resources/default/\"",
+            "REPO_TYPE": "\"local\""
+          }
+        ]
+      },
+      {
+        "php": "hhvm",
+        "env": [
+          {
+            "DB": "\"pgsql\"",
+            "REPO": "\"http://technic.pagefortress.com/\"",
+            "REPO_TYPE": "\"remote\""
+          }
+        ]
+      }
+    ]
+  }
+}
